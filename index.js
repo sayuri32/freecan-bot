@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const fetch = require('node-fetch');
-require('dotenv').config();  // .env の読み込み
+require('dotenv').config();
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const GAS_URL = process.env.GAS_URL;
@@ -14,7 +14,7 @@ const client = new Client({
   partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
-// Bot 起動時
+// 起動時
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
@@ -23,18 +23,13 @@ client.once('ready', () => {
 client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
-  // スレッド情報
   const threadId = message.thread?.id || null;
-
-  // 返信元メッセージ
   const parentId = message.reference?.messageId || null;
 
-  // ロール判定（フリキャン事務か受講生か）
   const role = message.member?.roles?.cache.some(r => r.name === 'フリキャン事務')
     ? 'フリキャン事務'
     : 'フリキャン受講生';
 
-  // GAS に送るデータ
   const payload = {
     channel_name: message.channel.name,
     channel_id: message.channel.id,
@@ -53,11 +48,17 @@ client.on('messageCreate', async (message) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    const text = await res.text();
-    console.log('GASレスポンス:', text);
+    console.log('GASレスポンス:', await res.text());
   } catch (err) {
     console.error('GAS送信エラー:', err);
   }
 });
+
+// Express Pingサーバー追加（スリープ回避用）
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+app.get('/', (req, res) => res.send('Bot is alive!'));
+app.listen(PORT, () => console.log(`Ping server running on port ${PORT}`));
 
 client.login(BOT_TOKEN);
