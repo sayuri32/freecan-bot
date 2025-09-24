@@ -1,16 +1,13 @@
 {
-  "name": "fricamp-bot",
+  "name": "freecan-bot",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "discord.js": "^14.22.1",
-    "node-fetch": "^2.7.0"
+    "discord.js": "^14.x",
+    "node-fetch": "^3.x",
+    "dotenv": "^16.x"
   }
 }
