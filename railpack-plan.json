@@ -3,7 +3,7 @@
     "cmd": "npm ci"
   },
   "build": {
-    "cmd": "npm run build"
+    "cmd": "echo 'Nothing to build'"
   },
   "deploy": {
     "cmd": "npm start"
