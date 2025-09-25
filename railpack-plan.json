@@ -1,11 +1,8 @@
 {
-  "install": {
-    "cmd": "npm ci"
-  },
   "build": {
-    "cmd": "echo 'Nothing to build'"
+    "install": ["npm ci"],
+    "build": ["echo 'Nothing to build'"],
+    "start": "npm start"
   },
-  "deploy": {
-    "cmd": "npm start"
-  }
+  "node_version": "22"
 }
