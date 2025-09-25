@@ -1,0 +1,11 @@
+{
+  "install": {
+    "cmd": "npm ci"
+  },
+  "build": {
+    "cmd": "npm run build"
+  },
+  "deploy": {
+    "cmd": "npm start"
+  }
+}
