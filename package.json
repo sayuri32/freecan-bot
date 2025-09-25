@@ -5,8 +5,7 @@
   "scripts": {
     "build": "echo 'Nothing to build'",
     "start": "node index.js"
-  }
-,
+  },
   "dependencies": {
     "discord.js": "^14.22.1",
     "dotenv": "^16.6.1",
